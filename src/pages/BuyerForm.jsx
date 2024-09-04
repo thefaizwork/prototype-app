@@ -1,76 +1,61 @@
-// src/pages/BuyerForm.jsx
-import React from 'react';
+import React, { useState } from 'react';
+import { buyerLogin, buyerSignup } from '../api/apiService'; // Import API functions
 
 function BuyerForm() {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [state, setState] = useState('');
+  const [city, setCity] = useState('');
+  const [pincode, setPincode] = useState('');
+  const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      await buyerLogin(phoneNumber, email);
+      // Handle successful login (e.g., navigate to a new page or show a success message)
+    } catch (error) {
+      // Handle error (e.g., show a message)
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSignup = async () => {
+    try {
+      setLoading(true);
+      const userData = { name, phoneNumber, email, address, state, city, pincode };
+      await buyerSignup(userData);
+      // Handle successful signup (e.g., navigate to a new page or show a success message)
+    } catch (error) {
+      // Handle error (e.g., show a message)
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-yellow-50 flex flex-col items-center">
-      {/* Navbar */}
-      {/* <nav className="bg-white p-6 w-full flex justify-between items-center shadow-md">
-        <div className="text-4xl font-bold text-black">
-          CONFARM
-        </div>
-        <div className="flex space-x-8 text-lg font-semibold">
-          <a href="#" className="text-black">SHOP</a>
-          <a href="#" className="text-black">WORKING</a>
-          <a href="#" className="text-black">BUYER</a>
-          <a href="#" className="text-black">SELLER</a>
-          <a href="#" className="text-black">PROFILE</a>
-        </div>
-      </nav> */}
-
-      {/* Form Container */}
       <div className="bg-white shadow-lg rounded-lg mt-12 p-8 w-3/4">
-        <h2 className="text-center text-green-600 text-3xl font-bold mb-8">Buyer Login & Registration</h2>
-        
+        <h2 className="text-center text-green-600 text-3xl font-bold mb-8">
+          {isLogin ? 'Buyer Login' : 'Buyer Registration'}
+        </h2>
+
         <div className="grid grid-cols-2 gap-8">
           {/* Login Form */}
-          <div className="bg-gray-50 p-6 rounded-md shadow-md">
-            <h3 className="text-xl font-bold text-gray-700 mb-4">Existing Buyer? Log In Below</h3>
-            <div className="mb-4">
-              <label className="block text-gray-600 mb-2">Phone Number</label>
-              <input
-                type="text"
-                placeholder="Enter your phone number"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-600 mb-2">Email</label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-              />
-            </div>
-            <button className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 mb-4">Send OTP</button>
-            <div className="mb-4">
-              <label className="block text-gray-600 mb-2">Enter OTP</label>
-              <input
-                type="text"
-                placeholder="Enter OTP"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-              />
-            </div>
-            <button className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700">Log In</button>
-          </div>
-
-          {/* Registration Form */}
-          <div className="bg-gray-50 p-6 rounded-md shadow-md">
-            <h3 className="text-xl font-bold text-gray-700 mb-4">New Buyer? Register Below</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="mb-4">
-                <label className="block text-gray-600 mb-2">Full Name</label>
-                <input
-                  type="text"
-                  placeholder="Enter your full name"
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-                />
-              </div>
+          {isLogin ? (
+            <div className="bg-gray-50 p-6 rounded-md shadow-md">
+              <h3 className="text-xl font-bold text-gray-700 mb-4">Existing Buyer? Log In Below</h3>
               <div className="mb-4">
                 <label className="block text-gray-600 mb-2">Phone Number</label>
                 <input
                   type="text"
                   placeholder="Enter your phone number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
@@ -79,6 +64,59 @@ function BuyerForm() {
                 <input
                   type="email"
                   placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+                />
+              </div>
+              <button
+                className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 mb-4"
+                onClick={handleLogin}
+                disabled={loading}
+              >
+                {loading ? 'Logging In...' : 'Log In'}
+              </button>
+              <p className="text-center text-gray-600">
+                Not a buyer?{' '}
+                <button
+                  onClick={() => setIsLogin(false)}
+                  className="text-green-600 hover:underline"
+                >
+                  Register here
+                </button>
+              </p>
+            </div>
+          ) : (
+            /* Registration Form */
+            <div className="bg-gray-50 p-6 rounded-md shadow-md">
+              <h3 className="text-xl font-bold text-gray-700 mb-4">New Buyer? Register Below</h3>
+              <div className="mb-4">
+                <label className="block text-gray-600 mb-2">Full Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-600 mb-2">Phone Number</label>
+                <input
+                  type="text"
+                  placeholder="Enter your phone number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-600 mb-2">Email</label>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
@@ -87,6 +125,8 @@ function BuyerForm() {
                 <input
                   type="text"
                   placeholder="Enter your address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
@@ -95,6 +135,8 @@ function BuyerForm() {
                 <input
                   type="text"
                   placeholder="Enter your state"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
@@ -103,6 +145,8 @@ function BuyerForm() {
                 <input
                   type="text"
                   placeholder="Enter your city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
@@ -111,21 +155,29 @@ function BuyerForm() {
                 <input
                   type="text"
                   placeholder="Enter your pincode"
+                  value={pincode}
+                  onChange={(e) => setPincode(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
+              <button
+                className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 mb-4"
+                onClick={handleSignup}
+                disabled={loading}
+              >
+                {loading ? 'Registering...' : 'Register'}
+              </button>
+              <p className="text-center text-gray-600">
+                Already a buyer?{' '}
+                <button
+                  onClick={() => setIsLogin(true)}
+                  className="text-green-600 hover:underline"
+                >
+                  Log in here
+                </button>
+              </p>
             </div>
-            <button className="w-full bg-yellow-500 text-white py-2 rounded-md hover:bg-yellow-600 mb-4">Send OTP</button>
-            <div className="mb-4">
-              <label className="block text-gray-600 mb-2">Enter OTP</label>
-              <input
-                type="text"
-                placeholder="Enter OTP"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
-              />
-            </div>
-            <button className="w-full bg-yellow-500 text-white py-2 rounded-md hover:bg-yellow-600">Register</button>
-          </div>
+          )}
         </div>
       </div>
     </div>
