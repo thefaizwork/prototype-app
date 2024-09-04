@@ -10,7 +10,7 @@ const api = axios.create({
 // Define API calls
 export const sellerLogin = async (phoneNumber, email) => {
   try {
-    const response = await api.post('/seller/login', { phoneNumber, email });
+    const response = await api.post('/api/v1/users/loginUser', { phoneNumber, email });
     return response.data;
   } catch (error) {
     console.error('Error logging in seller:', error);
@@ -20,7 +20,7 @@ export const sellerLogin = async (phoneNumber, email) => {
 
 export const sellerSignup = async (userData) => {
   try {
-    const response = await api.post('/seller/signup', userData);
+    const response = await api.post('/api/v1/users/registerUser', userData);
     return response.data;
   } catch (error) {
     console.error('Error signing up seller:', error);
