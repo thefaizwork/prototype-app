@@ -11,6 +11,7 @@ const api = axios.create({
 export const sellerLogin = async (phoneNumber, email) => {
   try {
     const response = await api.post('/api/v1/users/loginUser', { phoneNumber, email });
+    console.log("Login") 
     return response.data;
   } catch (error) {
     console.error('Error logging in seller:', error);
@@ -30,7 +31,7 @@ export const sellerSignup = async (userData) => {
 
 export const buyerLogin = async (phoneNumber, email) => {
   try {
-    const response = await api.post('/buyer/login', { phoneNumber, email });
+    const response = await api.post('/api/v1/users/loginUser', { phoneNumber, email });
     return response.data;
   } catch (error) {
     console.error('Error logging in buyer:', error);
@@ -40,7 +41,7 @@ export const buyerLogin = async (phoneNumber, email) => {
 
 export const buyerSignup = async (userData) => {
   try {
-    const response = await api.post('/buyer/signup', userData);
+    const response = await api.post('/api/v1/users/registerUser', userData);
     return response.data;
   } catch (error) {
     console.error('Error signing up buyer:', error);
