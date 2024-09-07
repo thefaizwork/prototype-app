@@ -3,7 +3,6 @@ import { Routes, Route, Link } from 'react-router-dom';
 import handshakeImage from './assets/handshake.png';
 import FarmerImage from './assets/Farmer.png';
 import CombinedForm from './pages/CombinedForm';
-import FarmerProfile from './pages/FarmerProfile';
 
 
 
@@ -45,7 +44,7 @@ function App() {
           }
         />
         <Route path="/combined-form" element={<CombinedForm />} />
-        <Route path="/farmer-profile" element={<FarmerProfile />} />
+        
       </Routes>
 
     </div>

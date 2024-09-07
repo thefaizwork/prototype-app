@@ -1,49 +1,43 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://contract-farming-system-backend.onrender.com';
+const API_URL = 'https://contract-farming-system-backend.onrender.com'; // Replace with your actual API URL
 
-// Create an instance of axios
-const api = axios.create({
-  baseURL: API_BASE_URL,
-});
+export const sellerSignup = async (data) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/v1/users/registerUser`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Error during seller signup:', error);
+    throw error;
+  }
+};
 
-// Define API calls
 export const sellerLogin = async (email, password) => {
   try {
-    const response = await api.post('/api/v1/users/loginUser', { email, password });
-    console.log('Login');
+    const response = await axios.post(`${API_URL}/api/v1/users/loginUser`, { email, password });
     return response.data;
   } catch (error) {
-    console.error('Error logging in seller:', error);
-    throw error;
-  }
-};
-export const sellerSignup = async (userData) => {
-  try {
-    const response = await api.post('/api/v1/users/registerUser', userData);
-    return response.data;
-  } catch (error) {
-    console.error('Error signing up seller:', error);
+    console.error('Error during seller login:', error);
     throw error;
   }
 };
 
-export const buyerLogin = async (phoneNumber, email) => {
+export const buyerSignup = async (data) => {
   try {
-    const response = await api.post('/api/v1/users/loginUser', { phoneNumber, email });
+    const response = await axios.post(`${API_URL}/api/v1/users/registerUser`, data);
     return response.data;
   } catch (error) {
-    console.error('Error logging in buyer:', error);
+    console.error('Error during buyer signup:', error);
     throw error;
   }
 };
 
-export const buyerSignup = async (userData) => {
+export const buyerLogin = async (email, password) => {
   try {
-    const response = await api.post('/api/v1/users/registerUser', userData);
+    const response = await axios.post(`${API_URL}/api/v1/users/loginUser`, { email, password });
     return response.data;
   } catch (error) {
-    console.error('Error signing up buyer:', error);
+    console.error('Error during buyer login:', error);
     throw error;
   }
 };

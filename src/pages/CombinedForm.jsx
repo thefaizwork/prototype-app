@@ -16,10 +16,10 @@ function CombinedForm() {
   const [city, setCity] = useState('');
   const [pincode, setPincode] = useState('');
 
-  // Sellerfields
+  // Seller fields
   const [farmName, setFarmName] = useState('');
 
-  // Buyefields
+  // Buyer fields
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const navigate = useNavigate();
@@ -40,20 +40,21 @@ function CombinedForm() {
       setLoading(true);
       if (role === 'buyer') {
         await buyerLogin(email, password);
-        navigate('/SellerProfile');
+        navigate('/buyer-profile'); // Navigate to the buyer profile page
       } else {
         await sellerLogin(email, password);
-        navigate('/BuyerProfile');
+        navigate('/farmer-profile'); // Navigate to the seller profile page
       }
     } catch (error) {
-      // Handle error (e.g., show a message)
+      console.error('Login failed:', error);
+      // Show an error message or alert the user
     } finally {
       setLoading(false);
     }
   };
 
   // Handle signup
-  const handleSignup = async () => {
+  async function handleSignup() {
     try {
       setLoading(true);
       const userData = { name, email, address, state, city, pincode };
@@ -63,14 +64,14 @@ function CombinedForm() {
         navigate('/buyer-profile');
       } else {
         await sellerSignup({ ...userData, password, farmName });
-        navigate('/seller-profile');
+        navigate('/farmer-profile');
       }
     } catch (error) {
       // Handle error (e.g., show a message)
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-yellow-50 flex flex-col items-center">
@@ -251,6 +252,7 @@ function CombinedForm() {
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
+
               <button
                 className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 mb-4"
                 onClick={handleSignup}
@@ -258,6 +260,7 @@ function CombinedForm() {
               >
                 {loading ? 'Registering...' : 'Register'}
               </button>
+
               <p className="text-center text-gray-600">
                 Already have an account?{' '}
                 <button onClick={() => setIsLogin(true)} className="text-green-600 hover:underline">
