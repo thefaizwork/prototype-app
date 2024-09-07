@@ -2,9 +2,8 @@ import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import handshakeImage from './assets/handshake.png';
 import FarmerImage from './assets/Farmer.png';
-import BuyerForm from './pages/BuyerForm'; 
-import SellerForm from './pages/SellerForm'; 
-import FarmerProfile from './pages/FarmerProfile'; 
+import CombinedForm from './pages/CombinedForm';
+import FarmerProfile from './pages/FarmerProfile';
 
 
 
@@ -25,27 +24,30 @@ function App() {
       </nav>
 
       {/* Main Content */}
+      {/* Main Content */}
       <Routes>
         <Route
           path="/"
           element={
             <div className="flex justify-center mt-10 px-4">
-              <Link to="/seller-form" className="flex-1 bg-green-500 flex flex-col items-center justify-center p-8">
-                <img src={FarmerImage} alt="FarmerImage" className="mb-6" />
+              {/* Both links should point to /combined-form */}
+              <Link to="/combined-form?role=seller" className="flex-1 bg-green-500 flex flex-col items-center justify-center p-8">
+                <img src={FarmerImage} alt="Farmer" className="mb-6" />
                 <span className="text-white text-3xl font-bold">SELL</span>
               </Link>
 
-              <Link to="/buyer-form" className="flex-1 bg-yellow-500 flex flex-col items-center justify-center p-8">
+              <Link to="/combined-form?role=buyer" className="flex-1 bg-yellow-500 flex flex-col items-center justify-center p-8">
                 <img src={handshakeImage} alt="Handshake" className="mb-6" />
                 <span className="text-green-900 text-3xl font-bold">BUY</span>
               </Link>
+
             </div>
           }
         />
-        <Route path="/buyer-form" element={<BuyerForm />} />
-        <Route path="/seller-form" element={<SellerForm />} /> 
-        <Route path="/farmer-profile" element={<FarmerProfile />} /> 
+        <Route path="/combined-form" element={<CombinedForm />} />
+        <Route path="/farmer-profile" element={<FarmerProfile />} />
       </Routes>
+
     </div>
   );
 }
