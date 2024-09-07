@@ -8,9 +8,9 @@ const api = axios.create({
 });
 
 // Define API calls
-export const sellerLogin = async (phoneNumber, email) => {
+export const sellerLogin = async (email, password) => {
   try {
-    const response = await api.post('/api/v1/users/loginUser', { phoneNumber, email });
+    const response = await api.post('/api/v1/users/loginUser', { email, password });
     console.log("Login") 
     return response.data;
   } catch (error) {

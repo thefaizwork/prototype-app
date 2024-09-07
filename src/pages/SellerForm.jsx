@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { sellerLogin, sellerSignup } from '../api/apiService'; // Import API functions
 
 function SellerForm() {
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
+  const [passward, setPassword] = useState('');
   const [name, setName] = useState('');
   const [farmName, setFarmName] = useState('');
   const [address, setAddress] = useState('');
@@ -18,7 +18,7 @@ function SellerForm() {
   const handleLogin = async () => {
     try {
       setLoading(true);
-      await sellerLogin(phoneNumber, email);
+      await sellerLogin(email, password);
       navigate('/farmer-profile');
     } catch (error) {
       // Handle error (e.g., show a message)
@@ -51,24 +51,24 @@ function SellerForm() {
           {/* Login Form */}
           {isLogin ? (
             <div className="bg-gray-50 p-6 rounded-md shadow-md">
-              <h3 className="text-xl font-bold text-gray-700 mb-4">Existing Seller? Log In Below</h3>
+              <h3 className="text-xl font-bold text-gray-700 mb-4">Existing Seller or Buyer? Log In Below</h3>
               <div className="mb-4">
-                <label className="block text-gray-600 mb-2">Phone Number</label>
+                <label className="block text-gray-600 mb-2">Email</label>
                 <input
                   type="text"
-                  placeholder="Enter your phone number"
+                  placeholder="Enter your Email"
                   value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-600 mb-2">Email</label>
+                <label className="block text-gray-600 mb-2">Password</label>
                 <input
-                  type="email"
-                  placeholder="Enter your email"
+                  type="Password"
+                  placeholder="Enter your Password"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
