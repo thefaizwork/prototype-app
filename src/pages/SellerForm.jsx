@@ -4,7 +4,7 @@ import { sellerLogin, sellerSignup } from '../api/apiService'; // Import API fun
 
 function SellerForm() {
   const [email, setEmail] = useState('');
-  const [passward, setPassword] = useState('');
+  const [password, setPassword] = useState(''); // Added password for both login and signup
   const [name, setName] = useState('');
   const [farmName, setFarmName] = useState('');
   const [address, setAddress] = useState('');
@@ -18,7 +18,7 @@ function SellerForm() {
   const handleLogin = async () => {
     try {
       setLoading(true);
-      await sellerLogin(email, password);
+      await sellerLogin(email, password); // Login with email and password
       navigate('/farmer-profile');
     } catch (error) {
       // Handle error (e.g., show a message)
@@ -30,7 +30,7 @@ function SellerForm() {
   const handleSignup = async () => {
     try {
       setLoading(true);
-      const userData = { name, phoneNumber, email, farmName, address, state, city, pincode };
+      const userData = { name, email, password, farmName, address, state, city, pincode }; // Include password in signup
       await sellerSignup(userData);
       navigate('/farmer-profile');
     } catch (error) {
@@ -51,13 +51,13 @@ function SellerForm() {
           {/* Login Form */}
           {isLogin ? (
             <div className="bg-gray-50 p-6 rounded-md shadow-md">
-              <h3 className="text-xl font-bold text-gray-700 mb-4">Existing Seller or Buyer? Log In Below</h3>
+              <h3 className="text-xl font-bold text-gray-700 mb-4">Existing Seller? Log In Below</h3>
               <div className="mb-4">
                 <label className="block text-gray-600 mb-2">Email</label>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Enter your Email"
-                  value={phoneNumber}
+                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
@@ -65,9 +65,9 @@ function SellerForm() {
               <div className="mb-4">
                 <label className="block text-gray-600 mb-2">Password</label>
                 <input
-                  type="Password"
+                  type="password"
                   placeholder="Enter your Password"
-                  value={email}
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
@@ -104,22 +104,22 @@ function SellerForm() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-600 mb-2">Phone Number</label>
-                <input
-                  type="text"
-                  placeholder="Enter your phone number"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-                />
-              </div>
-              <div className="mb-4">
                 <label className="block text-gray-600 mb-2">Email</label>
                 <input
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-600 mb-2">Password</label>
+                <input
+                  type="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>

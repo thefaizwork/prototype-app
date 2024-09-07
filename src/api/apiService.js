@@ -11,14 +11,13 @@ const api = axios.create({
 export const sellerLogin = async (email, password) => {
   try {
     const response = await api.post('/api/v1/users/loginUser', { email, password });
-    console.log("Login") 
+    console.log('Login');
     return response.data;
   } catch (error) {
     console.error('Error logging in seller:', error);
     throw error;
   }
 };
-
 export const sellerSignup = async (userData) => {
   try {
     const response = await api.post('/api/v1/users/registerUser', userData);
