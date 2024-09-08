@@ -6,7 +6,8 @@ import CombinedForm from './pages/CombinedForm';
 import FarmerProfile from './pages/FarmerProfile';
 import FarmRegister from './pages/FarmRegister';
 import CropSelling from './pages/CropSelling';
-import ProductManage from './pages/ProductManage';
+import ProductManage from './pages/ProductManage'
+import ContractRequest from './pages/ContractRequest'
 
 
 
@@ -54,6 +55,7 @@ function App() {
         <Route path="/farm-register" element={<FarmRegister />} />
        <Route path="/crop-selling" element={<CropSelling />} />
         <Route path="/product-manage" element={<ProductManage />} /> 
+        <Route path="/contract-request" element={<ContractRequest />} /> 
         
 
         

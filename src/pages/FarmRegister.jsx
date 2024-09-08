@@ -2,31 +2,44 @@ import React, { useState } from 'react';
 import Sidebar from '../componenets/sidebar';
 // import { farmRegister } from '../api/apiService';
 import { useNavigate } from 'react-router-dom';
+import { registerFarm } from '../api/apiService'; 
+
 
 function FarmRegister() {
-  const [farmName, setFarmName] = useState('');
-  const [farmSize, setFarmSize] = useState('');
-  const [cropPreferences, setCropPreferences] = useState('');
-  const [farmCompleteAddress, setFarmCompleteAddress] = useState('');
-  const [addressProof, setAddressProof] = useState(null);
-  const [farmingMethod, setFarmingMethod] = useState('');
-  const [yearOfExperience, setYearOfExperience] = useState('');
-
-  const navigate = useNavigate();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-
-    try {
-      await farmRegister(farmName, farmSize, cropPreferences, farmCompleteAddress, addressProof, farmingMethod, yearOfExperience);
-
-      navigate('/clone');
-    } catch (error) {
-      console.error('Error during farm registration:', error);
-    }
-  };
-
+    const [farmName, setFarmName] = useState('');
+    const [farmSize, setFarmSize] = useState('');
+    const [cropPreferences, setCropPreferences] = useState('');
+    const [farmCompleteAddress, setFarmCompleteAddress] = useState('');
+    const [addressProof, setAddressProof] = useState(null);
+    const [farmingMethod, setFarmingMethod] = useState('');
+    const [yearOfExperience, setYearOfExperience] = useState('');
+  
+    const navigate = useNavigate();
+  
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+  
+      const formData = new FormData();
+      formData.append('farmName', farmName);
+      formData.append('farmSize', farmSize);
+      formData.append('cropPreferences', cropPreferences);
+      formData.append('farmCompleteAddress', farmCompleteAddress);
+      formData.append('farmingMethod', farmingMethod);
+      formData.append('yearOfExperience', yearOfExperience);
+      
+      if (addressProof) {
+        formData.append('addressProof', addressProof);
+      }
+  
+      try {
+        await registerFarm(formData);
+  
+        navigate('/clone');
+      } catch (error) {
+        console.error('Error during farm registration:', error);
+      }
+    };
+  
   return (
     <div className="min-h-screen flex bg-gray-100">
       <Sidebar />

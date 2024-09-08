@@ -23,7 +23,7 @@ function Sidebar() {
             <a href="/product-manage" className="block text-gray-700 hover:text-green-600">Product Management</a>
           </li>
           <li>
-            <a href="#" className="block text-gray-700 hover:text-green-600">Contract Request</a>
+            <a href="contract-request" className="block text-gray-700 hover:text-green-600">Contract Request</a>
           </li>
           <li>
             <a href="#" className="block text-gray-700 hover:text-green-600">Active Contracts</a>
