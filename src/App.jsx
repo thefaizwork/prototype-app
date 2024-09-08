@@ -8,6 +8,10 @@ import FarmRegister from './pages/FarmRegister';
 import CropSelling from './pages/CropSelling';
 import ProductManage from './pages/ProductManage'
 import ContractRequest from './pages/ContractRequest'
+import BuyerProfile from './pages/buyer/BuyerProfile';
+import ContractPage from './pages/buyer/ContractPage';
+import RequestForm from './pages/buyer/RequestForm';
+import TrackRequest from './pages/buyer/TrackRequest';
 
 
 
@@ -56,6 +60,11 @@ function App() {
        <Route path="/crop-selling" element={<CropSelling />} />
         <Route path="/product-manage" element={<ProductManage />} /> 
         <Route path="/contract-request" element={<ContractRequest />} /> 
+        <Route path="/buyer-profile" element={<BuyerProfile/>} /> 
+        <Route path="/contractpage" element={<ContractPage/>} /> 
+        <Route path="/requestformpage" element={<RequestForm/>} /> 
+        <Route path="/trackrequest" element={<TrackRequest/>} /> 
+        
         
 
         
