@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { sellerSignup, sellerLogin, buyerSignup, buyerLogin } from '../api/apiService'; // Import API functions
 
 function CombinedForm() {
-  const [role, setRole] = useState('buyer'); // Default to buyer
+  const [role, setRole] = useState('buyer'); // Default to buyer based on URL
   const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
   const [loading, setLoading] = useState(false);
 
@@ -79,35 +79,6 @@ function CombinedForm() {
         <h2 className="text-center text-green-600 text-3xl font-bold mb-8">
           {isLogin ? `${role.charAt(0).toUpperCase() + role.slice(1)} Login` : `${role.charAt(0).toUpperCase() + role.slice(1)} Registration`}
         </h2>
-
-        {/* Role Selection */}
-        {isLogin && (
-          <div className="mb-6">
-            <label className="block text-gray-600 mb-2">Select Role</label>
-            <div className="flex space-x-4">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  value="buyer"
-                  checked={role === 'buyer'}
-                  onChange={(e) => setRole(e.target.value)}
-                  className="form-radio"
-                />
-                <span className="ml-2">Buyer</span>
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  value="seller"
-                  checked={role === 'seller'}
-                  onChange={(e) => setRole(e.target.value)}
-                  className="form-radio"
-                />
-                <span className="ml-2">Seller</span>
-              </label>
-            </div>
-          </div>
-        )}
 
         <div className="grid grid-cols-2 gap-8">
           {/* Login Form */}
@@ -252,17 +223,15 @@ function CombinedForm() {
                   className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
-
               <button
-                className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 mb-4"
+                className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700"
                 onClick={handleSignup}
                 disabled={loading}
               >
-                {loading ? 'Registering...' : 'Register'}
+                {loading ? 'Signing Up...' : 'Register'}
               </button>
-
-              <p className="text-center text-gray-600">
-                Already have an account?{' '}
+              <p className="text-center text-gray-600 mt-4">
+                Already a {role}?{' '}
                 <button onClick={() => setIsLogin(true)} className="text-green-600 hover:underline">
                   Log in here
                 </button>

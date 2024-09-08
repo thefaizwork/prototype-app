@@ -1,6 +1,6 @@
 // src/containers/FarmerProfile.js
 import React from 'react';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../componenets/sidebar';
 
 function FarmerProfile() {
   return (
