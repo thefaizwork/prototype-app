@@ -1,6 +1,7 @@
 // src/components/Sidebar.js
 import React from 'react';
 
+
 function Sidebar() {
   return (
     <aside className="w-64 bg-white p-4 shadow-md">
@@ -10,13 +11,16 @@ function Sidebar() {
       <nav>
         <ul className="space-y-8"> {/* Increased spacing */}
           <li>
-            <a href="#" className="block text-gray-700 hover:text-green-600">Profile Manager</a>
+            <a href="/farmer-profile" className="block text-gray-700 hover:text-green-600">Profile Manager</a>
           </li>
           <li>
-            <a href="#" className="block text-gray-700 hover:text-green-600">Crop Selling</a>
+            <a href="/farm-register" className="block text-gray-700 hover:text-green-600">Farm Register</a>
           </li>
           <li>
-            <a href="#" className="block text-gray-700 hover:text-green-600">Product Management</a>
+            <a href="/crop-selling" className="block text-gray-700 hover:text-green-600">Crop Selling</a>
+          </li>
+          <li>
+            <a href="/product-manage" className="block text-gray-700 hover:text-green-600">Product Management</a>
           </li>
           <li>
             <a href="#" className="block text-gray-700 hover:text-green-600">Contract Request</a>

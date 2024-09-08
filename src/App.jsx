@@ -4,6 +4,9 @@ import handshakeImage from './assets/handshake.png';
 import FarmerImage from './assets/Farmer.png';
 import CombinedForm from './pages/CombinedForm';
 import FarmerProfile from './pages/FarmerProfile';
+import FarmRegister from './pages/FarmRegister';
+import CropSelling from './pages/CropSelling';
+import ProductManagement from './pages/ProductManage';
 
 
 
@@ -44,8 +47,14 @@ function App() {
             </div>
           }
         />
+
+        
         <Route path="/combined-form" element={<CombinedForm />} />
         <Route path="/farmer-profile" element={<FarmerProfile />} />
+        <Route path="/farm-register" element={<FarmRegister />} />
+        <Route path="/crop-selling" element={<CropSelling />} />
+        <Route path="/product-manage" element={<ProductManagement />} />
+        
 
         
       </Routes>
