@@ -6,7 +6,7 @@ import CombinedForm from './pages/CombinedForm';
 import FarmerProfile from './pages/FarmerProfile';
 import FarmRegister from './pages/FarmRegister';
 import CropSelling from './pages/CropSelling';
-import ProductManagement from './pages/ProductManage';
+import ProductManage from './pages/ProductManage';
 
 
 
@@ -50,10 +50,10 @@ function App() {
 
         
         <Route path="/combined-form" element={<CombinedForm />} />
-        <Route path="/farmer-profile" element={<FarmerProfile />} />
+        <Route path="/farmer-profile" element={<FarmerProfile />} /> 
         <Route path="/farm-register" element={<FarmRegister />} />
-        <Route path="/crop-selling" element={<CropSelling />} />
-        <Route path="/product-manage" element={<ProductManagement />} />
+       <Route path="/crop-selling" element={<CropSelling />} />
+        <Route path="/product-manage" element={<ProductManage />} /> 
         
 
         
